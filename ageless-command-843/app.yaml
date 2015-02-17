@@ -11,6 +11,9 @@ handlers:
 
 - url: /static
   static_dir: static
+  
+- url: /userRegister
+  script: register.app
 
 - url: /.*
   script: code.app
