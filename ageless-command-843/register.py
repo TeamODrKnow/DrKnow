@@ -1,17 +1,17 @@
 import os
 import webapp2
 from google.appengine.ext.webapp import template
-from google.appengine.ext.webapp import ndb
+from google.appengine.ext import ndb
 
 def render_template(handler, templatename, templatevalues) :
   path = os.path.join(os.path.dirname(__file__), 'templates/' + templatename)
   html = template.render(path, templatevalues)
   handler.response.out.write(html)
-  
+
 class UserModel(ndb.Model) :
 	fname = ndb.StringProperty()
 	lname = ndb.StringProperty()
-	
+
 class ProcessUser(webapp2.RequestHandler) :
 	def post(self) :
 		NewUser = UserModel()
@@ -20,8 +20,8 @@ class ProcessUser(webapp2.RequestHandler) :
 		NewUser.put()
 		self.redirect('/')
 
-    
+
 
 app = webapp2.WSGIApplication([
-  ('/userRegister', ProcessUser) 
+  ('/userRegister', ProcessUser)
 ], debug = True)

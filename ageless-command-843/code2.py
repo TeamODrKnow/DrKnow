@@ -5,6 +5,9 @@ from google.appengine.ext.webapp import template
 
 #######################################################################
 ## Function to retrieve and render a template
+
+var isLoggedIn = 0;
+
 def render_template(handler, templatename, templatevalues):
     path = os.path.join(os.path.dirname(__file__), 'templates/' + templatename)
     html = template.render(path, templatevalues)
@@ -13,7 +16,11 @@ def render_template(handler, templatename, templatevalues):
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        render_template(self, 'index.html', {})
+        if isLoggedIn == 0
+            render_template(self, 'index.html', {})
+        else
+
+            render_template(self, 'indexRegistered.html', {})
 
 class RegisterUser(webapp2.RequestHandler):
     def get(self):
@@ -29,6 +36,7 @@ class ProcessUser(webapp2.RequestHandler) :
         NewUser.fname = self.request.get('fname')
         NewUser.lname = self.request.get('lname')
         NewUser.put()
+        isLoggedIn = 1;
         self.redirect('/')
 
 

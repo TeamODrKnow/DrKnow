@@ -162,6 +162,7 @@ body nav {
 	padding-left: 35;
 	padding-bottom: 10;
 	text-align: center;
+	text-decoration: none;
 }
 .navbar .navButtons ul li a:hover {
 	color: #95DBF9;	
@@ -194,6 +195,7 @@ body main {
 	/* [disabled]clear: both; */
 	padding-top: 0px;
 	margin-top: 15px;
+	display: block;
 }
 .welcome .messageBox p {
 	color: #F3F0F0;
@@ -234,10 +236,11 @@ body main {
 	text-decoration: none;
 }
 .welcome .start {
-	display: block;
-	clear: both;
+	display: inline-block;
 	text-decoration: none;
-	padding-top: 35px;
+	padding-top: 20px;
+	float: right;
+	margin-right: 10%;
 }
 .welcome .start span {
 	display: block;
@@ -260,6 +263,8 @@ body main {
 	margin-bottom: 40px;
 	color: #21AEEC;
 	text-align: center;
+	margin-right: 39px;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .engineScene .leftPanel {
 	float: left;
@@ -270,16 +275,14 @@ body main {
 	float: left;
 	width: 50%;
 	margin-left: 3%;
-	background-image: -webkit-linear-gradient(270deg,rgba(46,74,101,1.00) 0%,rgba(0,0,0,1.00) 100%);
-	background-image: -moz-linear-gradient(270deg,rgba(46,74,101,1.00) 0%,rgba(0,0,0,1.00) 100%);
-	background-image: -o-linear-gradient(270deg,rgba(46,74,101,1.00) 0%,rgba(0,0,0,1.00) 100%);
-	background-image: linear-gradient(180deg,rgba(46,74,101,1.00) 0%,rgba(0,0,0,1.00) 100%);
-	border: thin solid #1F3142;
+	border-style: solid;
+	border-width: thin;
 	border-radius: 5px;
 	display: inline-block;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
+	background-image: url(../style2-assets/wordcloud_try_again.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 45% 45%;
 }
 .engineScene .rightPanel {
 	margin-left: 3%;
@@ -287,9 +290,57 @@ body main {
 	margin-right: 5%;
 	width: 15%;
 }
-.engineScene .wordCloud p {
-	text-align: center;
-	color: #C7EAFA;
+.hgroup div h2 {
+	font-weight: 200;
+}
+.welcome section {
+	display: block;
+	padding-top: 35px;
+	clear: both;
+	padding-right: 0px;
+	margin-left: 10%;
+	margin-top: 0%;
+	margin-right: 0%;
+	margin-bottom: 0%;
+}
+section .register span {
+	display: block;
+	margin-top: -5px;
+	color: #5AACFF;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: large;
+	text-transform: uppercase;
+	text-shadow: 0px 0px 25px #0F62CF;
+	font-weight: 300;
+}
+.welcome .register:before {
+	content: '\f411';
+	line-height: 1;
+	font-weight: normal;
+	font-variant: normal;
+	font-style: normal;
+	font-size: 62px;
+	font-family: 'Genericons';
+	display: inline-block;
+	/* [disabled]vertical-align: sub; */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #21AEEC;
+	clear: both;
+	padding-top: 0px;
+	margin-top: 12px;
+	text-shadow: 0px -3px 8px #1F3142;
+	text-decoration: none;
+}
+.welcome section .register {
+	text-decoration: none;
+	display: inline;
+	float: left;
+}
+.welcome div p {
+	margin-top: -1px;
+	padding-bottom: 0px;
+}
 }
 @media screen and (max-width:400px){
 .navbar .brand a {
