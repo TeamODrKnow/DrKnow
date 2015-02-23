@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Doctor Know</title>
+<link href="../static/stylesheets/Styles.css" rel="stylesheet" type="text/css">
+<meta name="keywords" content="Doctor Know, Creativity, Project Ideas, App Engine, Artificial Intelligence, Machine Learning, University of Pittsburgh, Web App, Python">
+<meta name="description" content="This site is a student project for the University of Pittsburgh CS 1520 course. It is intended to take data streams as input and present the information in a fun and usable way.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<header>
+  <div class="titleBanner">
+    <div class="logoWords leftWord">doctor</div>
+    <div class="logoContainer"><img src="../static/style2-assets/DKLogo2.png" alt="Artificial Creativity Engine" width="686" height="686" class="logo" title="Doctor Know Logo"></div>
+    <div class="logoWords rightWord">know</div>
+  </div>
+</header>
+<main>
+  <section class="welcome">
+    {% block welcome %}{% endblock %}
+  </section>
+</main>
+<nav id="nav">
+    {% block navbar %}{% endblock %}
+</nav>
+<section class="engineScene">
+  {% block engine %}{% endblock %}
+</section>
+<footer>
+  {% block footer %}{% endblock %}
+</footer>
+</body>
+</html>

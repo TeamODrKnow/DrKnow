@@ -1,5 +1,8 @@
 import os
 import webapp2
+import time
+
+from google.appengine.api import users
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
 
@@ -10,19 +13,35 @@ def render_template(handler, templatename, templatevalues):
     html = template.render(path, templatevalues)
     handler.response.out.write(html)
 
-
+#######################################################################
+## Handles and loads index page
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        render_template(self, 'index.html', {})
+        user = users.get_current_user()
+        login = users.create_login_url('/')
+        logout = users.create_logout_url('/')
 
+        template_values = {
+        'login': login,
+        'logout': logout,
+        'user': user
+        }
+        render_template(self, 'index.html', template_values)
+
+#######################################################################
+## Handle user info and profile
 class RegisterUser(webapp2.RequestHandler):
     def get(self):
         render_template(self, 'registerUser.html', {})
 
+#######################################################################
+## Establish user objects
 class UserModel(ndb.Model) :
     fname = ndb.StringProperty()
     lname = ndb.StringProperty()
 
+#######################################################################
+## process user objects
 class ProcessUser(webapp2.RequestHandler) :
     def post(self) :
         NewUser = UserModel()
