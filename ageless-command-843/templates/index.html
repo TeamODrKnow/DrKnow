@@ -1,62 +1,107 @@
 {% extends "base.html" %}
-
-{% block welcome %}
+{% block main %}
+<!-- welcome banner (3 blocks of 4) -->
+<section>
   {% if user %}
-    <div><p> </p></div>
-      <div class="messageBox">
+    <div class="col-xs-3"></div>
+    <div>
+      <section class="col-xs-6 center-block">
+        <h2>Welcome to the know.</h2>
+        <br>
+        <h3>Please remember to update your user <a href="profile.html" title="profile"><span>profile!</span></a></h3>
+        <p>Otherwise, just click <a href="#nav" class="start">here</a> to get started.</p>
+        <p>Or click <a href="{{logout}}" class="start">here</a> to logout.</p>
+        <br>
+      </section>
+    </div>
+    <div class="col-xs-3"></div>
+  {% else %}
+    <div class="col-xs-3"></div>
+      <div class="col-xs-6">
         <h2>Welcome to the show.</h2>
         <h4>Dr. Know is a fully customizable Artificial Creativity Engine.</h4>
         <p> It is not just another content discovery tool. </p>
-        <p>It is a tool that allows the user to cross reference disparate sources of information<br>
-        and data streams that combine real time world events and social activity with personal interests.</p>
+        <p>It is a tool that allows the user to cross reference disparate sources of information
+        <br> and data streams that combine real time world events and social activity with personal interests.</p>
         <p>It is at the nexus of these obtuse combinations that new and interesting ideas are generated.</p>
         <p>All you have to do is connect your accounts, select your data streams, and grab interesting words from the engine.</p>
       </div>
-    <div><p> </p></div>
-    <section>
-    <a href="{{ login }}" class="register"><span> Register </span></a></section>
-    <a href="#nav" class="start"><span> Try it Out </span></a></section>
-  {% else %}
-    <div><p> </p></div>
-      <div class="messageBox">
-        <h2>Welcome to the know.</h2><br><br>
-        <h3>Please remember to update your user <a href="profile.html" title="profile"><span>profile!</span></h3>
-        <p>Otherwise, just click <a href="#nav" class="start"><span>here</span></a></section> to get started.</p>
-        <br>
-      </div>
-    <div><p> </p></div>
-    <section>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+      <a href="{{ login }}" class="glyphicon glyphicon-pencil"></a><p>Register</p>
+    </div>
+    <div class="col-xs-6">
+      <a href="#nav" class="glyphicon glyphicon-play-circle"></a><p>Try It Out</p>
+    </div>
   {% endif %}
+</section>
 {% endblock %}
 
 {% block navbar %}
-  <div class="navbar">
-    <div class="brand"> <a href="index.html" title="DoctorKnow" target="#engine"><span>Doctor Know</span></a> </div>
-    <div class="navButtons">
-      <ul>
-        <li><a href="#engine" class="navHome" id = "engine"><span>Engine</span></a></li>
-        {% if user %}
-        <li><a class="navProfile" href="{{ login }}"><span>Log In</span></a></li>
-        {% else %}
-        <li><a class="navProfile" href="{{ logout }}"><span>Log In</span></a></li>
-        {% endif %}
-        <li><a class="navAccount" href="#profile"><span>Profile</span></a></li>
-        <li><a class="navInfo" href="#info"><span>Project</span></a></li>
-      </ul>
+<nav class="navbar navbar-default navbar-static-bottom">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">doctor know</a>
     </div>
-  </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#"><span class="glyphicon glyphicon-cloud-download hidden-sm"></span> Engine</a></li>
+        <li><a href="#profile"><span class="glyphicon glyphicon-user hidden-sm"></span> Profile</a></li>
+        <li><a href="#linked"><span class="glyphicon glyphicon-link hidden-sm"></span> Linked Accounts</a></li>
+        <li><a href="#channels"><span class="glyphicon glyphicon-th hidden-sm"></span> Channels</a></li>
+        <li><a href="#saved"><span class="glyphicon glyphicon-screenshot hidden-sm"></span> Saved Searches</a></li>
+      </ul>
+      {% if user %}
+      <p class="navbar-text"><span class="hidden-sm">Signed in as </span><a href="#profile" class="navbar-link"> {{nickname}}     </a></p>
+      <p class="navbar-text navbar-right"><a href="{{logout}}" class="navbar-link"> Log Out</a></p>
+      {% else %}
+      <p class="navbar-text navbar-right"><a href="{{login}}" class="navbar-link"> Log In</a></p>
+      {% endif %}
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 {% endblock %}
 
 {% block engine %}
-  <article class="hgroup">
-  	<div><h2>Artificial Creativity Engine</h2></div>
-  </article>
-  <div class="leftPanel">
-    <img src="../static/style2-assets/heads.png" width="129" height="322" alt=""/>
+<div><h2>Artificial Creativity Engine</h2></div>
+  <div class="col-xs-3 btn-group btn-block-stack" data-toggle="buttons">
+    <a href="#" class="btn btn-primary active"><img src="../static/images/brainstormApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="brainstorm" autocomplete="off" checked> Brainstorm
+    </a>
+    <a href="#" class="btn btn-primary"><img src="../static/images/favoritesApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="favorites" autocomplete="off"> Favorites
+    </a>
+    <a href="#" class="btn btn-primary"><img src="../static/images/moviesApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="movies" autocomplete="off"> Movies
+    </a>
+    <a href="#" class="btn btn-primary"><img src="../static/images/musicApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="music" autocomplete="off"> Music
+    </a>
+    <a href="#" class="btn btn-primary"><img src="../static/images/dataApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="data" autocomplete="off"> Data
+    </a>
+    <a href="#" class="btn btn-primary"><img src="../static/images/bookApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="books" autocomplete="off"> Books
+    </a>
+    <a href="#" class="btn btn-primary"><img src="../static/images/scienceApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="science" autocomplete="off"> Science
+    </a>
+    <a href="#" class="btn btn-primary"><img src="../static/images/travelApp.png" class="img-responsive center-block" width="50%">
+      <input type="radio" name="options" id="travel" autocomplete="off"> Travel
+    </a>
   </div>
 
-  <div class="wordCloud">
-    <p>WordCloud Here</p>
+<div class="col-xs-7">
+    <p></p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -65,19 +110,21 @@
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-  </div>
+</div>
 
-  <div class="rightPanel">
-  	<ul>
-      <li><a class="icon twitter" href="#twitter"><span>Twitter</span></a></li>
-      <li><a class="icon factual" href="#factual"><span>Factual</span></a></li>
-      <li><a class="icon reddit" href="#reddit"><span>Reddit</span></a></li>
-      <li><a class="icon cia" href="#cia"><span>CIA</span></a></li>
+<div class="col-xs-2">
+    <ul>
+        <li><a class="icon twitter" href="#twitter"><span>Twitter</span></a>
+        </li>
+        <li><a class="icon factual" href="#factual"><span>Factual</span></a>
+        </li>
+        <li><a class="icon reddit" href="#reddit"><span>Reddit</span></a>
+        </li>
+        <li><a class="icon cia" href="#cia"><span>CIA</span></a>
+        </li>
     </ul>
-  </div>
+</div>
+<div>
+  <textarea></textarea>
+</div>
 {% endblock %}
-
-{% block footer %}
-{% endblock %}
-
-

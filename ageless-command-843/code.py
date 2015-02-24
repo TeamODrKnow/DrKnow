@@ -17,14 +17,21 @@ def render_template(handler, templatename, templatevalues):
 ## Handles and loads index page
 class MainPage(webapp2.RequestHandler):
     def get(self):
+        nickname = "null"
+        email = "null"
         user = users.get_current_user()
         login = users.create_login_url('/')
         logout = users.create_logout_url('/')
+        if user != None:
+            nickname = user.nickname()
+            email = user.email()
 
         template_values = {
         'login': login,
         'logout': logout,
-        'user': user
+        'user': user,
+        'nickname': nickname,
+        'email': email
         }
         render_template(self, 'index.html', template_values)
 
