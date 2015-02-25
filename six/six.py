@@ -27,6 +27,7 @@ import itertools
 import operator
 import sys
 import types
+import django.utils.six.moves.urllib.parse
 
 __author__ = "Benjamin Peterson <benjamin@python.org>"
 __version__ = "1.9.0"
