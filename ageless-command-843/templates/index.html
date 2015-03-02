@@ -54,77 +54,19 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#"><span class="glyphicon glyphicon-cloud-download hidden-sm"></span> Engine</a></li>
+        <li><a href="/engine"><span class="glyphicon glyphicon-cloud-download hidden-sm"></span> Engine</a></li>
         <li><a href="#profile"><span class="glyphicon glyphicon-user hidden-sm"></span> Profile</a></li>
         <li><a href="#linked"><span class="glyphicon glyphicon-link hidden-sm"></span> Linked Accounts</a></li>
         <li><a href="#channels"><span class="glyphicon glyphicon-th hidden-sm"></span> Channels</a></li>
         <li><a href="#saved"><span class="glyphicon glyphicon-screenshot hidden-sm"></span> Saved Searches</a></li>
       </ul>
-      {% if user %}
+    {% if user %}
       <p class="navbar-text"><span class="hidden-sm">Signed in as </span><a href="#profile" class="navbar-link"> {{nickname}}     </a></p>
       <p class="navbar-text navbar-right"><a href="{{logout}}" class="navbar-link"> Log Out</a></p>
-      {% else %}
+    {% else %}
       <p class="navbar-text navbar-right"><a href="{{login}}" class="navbar-link"> Log In</a></p>
-      {% endif %}
+    {% endif %}
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-{% endblock %}
-
-{% block engine %}
-<div><h2>Artificial Creativity Engine</h2></div>
-  <div class="col-xs-3 btn-group btn-block-stack" data-toggle="buttons">
-    <a href="#" class="btn btn-primary active"><img src="../static/images/brainstormApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="brainstorm" autocomplete="off" checked> Brainstorm
-    </a>
-    <a href="#" class="btn btn-primary"><img src="../static/images/favoritesApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="favorites" autocomplete="off"> Favorites
-    </a>
-    <a href="#" class="btn btn-primary"><img src="../static/images/moviesApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="movies" autocomplete="off"> Movies
-    </a>
-    <a href="#" class="btn btn-primary"><img src="../static/images/musicApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="music" autocomplete="off"> Music
-    </a>
-    <a href="#" class="btn btn-primary"><img src="../static/images/dataApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="data" autocomplete="off"> Data
-    </a>
-    <a href="#" class="btn btn-primary"><img src="../static/images/bookApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="books" autocomplete="off"> Books
-    </a>
-    <a href="#" class="btn btn-primary"><img src="../static/images/scienceApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="science" autocomplete="off"> Science
-    </a>
-    <a href="#" class="btn btn-primary"><img src="../static/images/travelApp.png" class="img-responsive center-block" width="50%">
-      <input type="radio" name="options" id="travel" autocomplete="off"> Travel
-    </a>
-  </div>
-
-<div class="col-xs-7">
-    <p></p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-</div>
-
-<div class="col-xs-2">
-    <ul>
-        <li><a class="icon twitter" href="#twitter"><span>Twitter</span></a>
-        </li>
-        <li><a class="icon factual" href="#factual"><span>Factual</span></a>
-        </li>
-        <li><a class="icon reddit" href="#reddit"><span>Reddit</span></a>
-        </li>
-        <li><a class="icon cia" href="#cia"><span>CIA</span></a>
-        </li>
-    </ul>
-</div>
-<div>
-  <textarea></textarea>
-</div>
 {% endblock %}
