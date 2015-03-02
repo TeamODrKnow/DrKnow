@@ -19,7 +19,7 @@ from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
 #######################################################################
 
-PROJECT_NUMBER = '934763316754'
+PROJECTID = 'ageless-command-843'
 
 CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
 
@@ -99,8 +99,6 @@ class UserModel(ndb.Model) :
 ## process user objects
 class ProcessUser(webapp2.RequestHandler) :
 
-    @bq_decorator.oauth_required
-    http = decorator.http()
     def post(self) :
         NewUser = UserModel()
         NewUser.fname = self.request.get('fname')
@@ -119,7 +117,7 @@ class EngineHandler(webapp2.RequestHandler) :
         temp_path = 'templates/engine.html'
         queryData = {'query':'SELECT word FROM [rtda.tweets] LIMIT 1000'}
         tableData = bigquery_service.jobs()
-        response = tableData.query(projectId=PROJECT_NUMBER,body=queryData).execute()
+        response = tableData.query(projectId=PROJECTID,body=queryData).execute()
         self.response.out.write(response)
 
 app = webapp2.WSGIApplication( [
