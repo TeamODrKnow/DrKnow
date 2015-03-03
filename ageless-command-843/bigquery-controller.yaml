@@ -25,7 +25,7 @@ desiredState:
                 value: twitter-stream
               # Change this to your project ID.
               - name: PROJECT_ID
-                value: ageless-command-843
+                value: doctor-know
               # Change the following two settings to your dataset and table.
               - name: BQ_DATASET
                 value: rtda

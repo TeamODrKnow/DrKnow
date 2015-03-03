@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 __author__ = 'jml168@pitt.edu (J. Matthew Landis)'
 
@@ -9,7 +8,7 @@ import pickle
 import webapp2
 import time
 import httplib2
-
+import json
 from apiclient import discovery
 from oauth2client import appengine
 from oauth2client import client
@@ -19,7 +18,7 @@ from google.appengine.ext import ndb
 from google.appengine.ext.webapp import template
 #######################################################################
 
-PROJECTID = 'ageless-command-843'
+PROJECTID = '1037041195026'
 
 CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
 
@@ -85,18 +84,15 @@ class MainPage(webapp2.RequestHandler):
 
 #######################################################################
 ## Handle user info and profile
-class RegisterUser(webapp2.RequestHandler):
+class CreateProfile(webapp2.RequestHandler):
     def get(self):
-        render_template(self, 'registerUser.html', {})
+        template_data = {}
+        template_path = 'templates/createProfile.html'
+        self.response.out.write(template.render(template_path,template_data))
+
 
 #######################################################################
-## Establish user objects
-class UserModel(ndb.Model) :
-    fname = ndb.StringProperty()
-    lname = ndb.StringProperty()
-
-#######################################################################
-## process user objects
+## process user profile
 class ProcessUser(webapp2.RequestHandler) :
 
     def post(self) :
@@ -107,24 +103,81 @@ class ProcessUser(webapp2.RequestHandler) :
         self.redirect('/')
 
 #######################################################################
-## process user objects
-class EngineHandler(webapp2.RequestHandler) :
+## Model Data
+class DataHandler(webapp2.RequestHandler) :
 
-    @bq_decorator.oauth_required
+    @bq_decorator.oauth_aware
     def get(self) :
-        http = bq_decorator.http()
-        temp_data = {}
-        temp_path = 'templates/engine.html'
-        queryData = {'query':'SELECT word FROM [rtda.tweets] LIMIT 1000'}
-        tableData = bigquery_service.jobs()
-        response = tableData.query(projectId=PROJECTID,body=queryData).execute()
-        self.response.out.write(response)
+        if bq_decorator.has_credentials():
+            http = bq_decorator.http()
+            inputData = self.request.get("inputData")
+            queryData = {'query':'SELECT SUM(word_count) as WCount,corpus_date,group_concat(corpus) as Work FROM '
+'[publicdata:samples.shakespeare] WHERE word="'+inputData+'" and corpus_date>0 GROUP BY corpus_date ORDER BY WCount'}
+            tableData = bigquery_service.jobs()
+            dataList = tableData.query(projectId=PROJECTID,body=queryData).execute(http)
+
+            resp = []
+            if 'rows' in dataList:
+                #parse dataList
+                for row in dataList['rows']:
+                    for key,dict_list in row.iteritems():
+                        count = dict_list[0]
+                        year = dict_list[1]
+                        corpus = dict_list[2]
+                        resp.append({'count': count['v'],'year':year['v'],'corpus':corpus['v']})
+            else:
+                resp.append({'count':'0','year':'0','corpus':'0'})
+            self.response.headers['Content-Type'] = 'application/json'
+            self.response.out.write(json.dumps(resp))
+        else:
+            self.response.write(json.dumps({'error':'No credentials'}))
+
+
+#######################################################################
+## Profile Page
+class ProfilePage(webapp2.RequestHandler) :
+
+    def get(self):
+        template_data = {}
+        template_path = 'templates/profile.html'
+        self.response.out.write(template.render(template_path,template_data))
+
+
+
+#######################################################################
+## Artificial Creativity Engine
+class DisplayEngine(webapp2.RequestHandler) :
+
+    def get(self):
+        template_data = {}
+        template_path = 'templates/engine.html'
+        self.response.out.write(template.render(template_path,template_data))
+
+
+#######################################################################
+## Data Analysis
+class DisplayData(webapp2.RequestHandler) :
+
+    def get(self):
+        template_data = {}
+        template_path = 'templates/data.html'
+        self.response.out.write(template.render(template_path,template_data))
+
+
+#######################################################################
+## Establish/Update User Profile
+class UserModel(ndb.Model) :
+    fname = ndb.StringProperty()
+    lname = ndb.StringProperty()
 
 app = webapp2.WSGIApplication( [
     ('/', MainPage),
-    ('/registerUser.html', RegisterUser),
+    ('/profile', ProfilePage),
+    ('/createProfile', CreateProfile),
     ('/userRegister', ProcessUser),
-    ('/engine', EngineHandler),
+    ('/getData', DataHandler),
+    ('/data', DisplayData),
+    ('/engine', DisplayEngine),
     (decorator.callback_path, decorator.callback_handler()),
     (bq_decorator.callback_path, bq_decorator.callback_handler())
 ], debug=True)

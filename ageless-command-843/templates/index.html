@@ -8,7 +8,7 @@
       <section class="col-xs-6 center-block">
         <h2>Welcome to the know.</h2>
         <br>
-        <h3>Please remember to update your user <a href="profile.html" title="profile"><span>profile!</span></a></h3>
+        <h3>Please remember to update your user <a href="/createProfile" title="profile"><span>profile!</span></a></h3>
         <p>Otherwise, just click <a href="#nav" class="start">here</a> to get started.</p>
         <p>Or click <a href="{{logout}}" class="start">here</a> to logout.</p>
         <br>
@@ -48,16 +48,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">doctor know</a>
+      <a class="navbar-brand" href="/">doctor know</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="/engine"><span class="glyphicon glyphicon-cloud-download hidden-sm"></span> Engine</a></li>
-        <li><a href="#profile"><span class="glyphicon glyphicon-user hidden-sm"></span> Profile</a></li>
+        <li><a href="/data"><span class="glyphicon glyphicon-eye-open hidden-sm"></span> Data Analysis</a></li>
+        <li><a href="/profile"><span class="glyphicon glyphicon-user hidden-sm"></span> Profile</a></li>
         <li><a href="#linked"><span class="glyphicon glyphicon-link hidden-sm"></span> Linked Accounts</a></li>
-        <li><a href="#channels"><span class="glyphicon glyphicon-th hidden-sm"></span> Channels</a></li>
         <li><a href="#saved"><span class="glyphicon glyphicon-screenshot hidden-sm"></span> Saved Searches</a></li>
       </ul>
     {% if user %}

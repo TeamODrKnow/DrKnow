@@ -1,5 +1,5 @@
 application: ageless-command-843
-version: 2
+version: 3
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -16,7 +16,7 @@ handlers:
   static_dir: static/stylesheets
 
 - url: /.*
-  script: code.app
+  script: main.app
 
 libraries:
 - name: webapp2
